@@ -47,10 +47,10 @@ if (!await db.Employees.AnyAsync())
 {
     // Setup initial test data
     db.Employees.AddRange(
-        new Employee { Name = "Tom", TaxPayerId = "12345", Salary = 50000 },
-        new Employee { Name = "Dick", TaxPayerId = "23456", Salary = 100000 },
-        new Employee { Name = "Sally", TaxPayerId = "34567", Salary = 199000 },
-        new Employee { Name = "Harry", TaxPayerId = "45678", Salary = 200000 });
+        new Employee { Name = "Tom", TaxPayerId = "12345", Salary = 50000, Notes = "" },
+        new Employee { Name = "Dick", TaxPayerId = "23456", Salary = 100000, Notes = "Very busy" },
+        new Employee { Name = "Sally", TaxPayerId = "34567", Salary = 199000, Notes = "Afternoons" },
+        new Employee { Name = "Harry", TaxPayerId = "45678", Salary = 200000, Notes = "Weekends" });
     await db.SaveChangesAsync();
 }
 

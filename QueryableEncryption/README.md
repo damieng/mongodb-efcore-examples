@@ -268,8 +268,6 @@ Here's a short check-list to point you in the right direction but each step requ
 
 I hope that you found this quickstart on Queryable Encryption with the MongoDB EF Core Provider helpful. 
 
-You can find the [full source code to the sample](https://github.com/damieng/mongodb-efcore-examples) over at GitHub.
-
 Enjoy!
 
 Damien

@@ -2,6 +2,6 @@
 
 A repo of small samples and snippets for using the MongoDB EF Core Provider.
 
-## [QueryableEncryption](./tree/main/QueryableEncryption)
+## [QueryableEncryption](https://github.com/damieng/mongodb-efcore-examples/tree/main/QueryableEncryption)
 
 The basic of using MongoDB Queryable Encryption.

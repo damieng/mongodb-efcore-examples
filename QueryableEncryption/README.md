@@ -113,8 +113,7 @@ var options = new DbContextOptionsBuilder()
         .WithClientSettings(clientSettings)
         .WithDatabaseName(databaseName)
         .WithKeyVaultNamespace(keyVaultNamespace)
-        .WithCryptProvider(CryptProvider.AutoEncryptSharedLibrary,
-                           "C:\\MongoDB\\mongo_crypt_v1.dll")
+        .WithCryptProvider(CryptProvider.AutoEncryptSharedLibrary, "C:\\MongoDB\\mongo_crypt_v1.dll")
         .WithKmsProviders(kmsProviders));
 ```
 
@@ -138,8 +137,7 @@ public class Employee
 We want to encrypt two properties here so we'll need to generate two Data Encryption Keys we can use. Like when we generated the Customer Master Key we will write some one-time code to generate them in our key vault and we'll output the necessary GUIDs to reference them from our app.
 
 ```csharp
-using var clientEncryption = new ClientEncryption(
-    new ClientEncryptionOptions(new MongoClient(clientSettings), keyVaultNamespace, kmsProviders));
+using var clientEncryption = new ClientEncryption(new ClientEncryptionOptions(new MongoClient(clientSettings), keyVaultNamespace, kmsProviders));
 
 Guid CreateDataKey() => clientEncryption.CreateDataKey("local", new DataKeyOptions(), CancellationToken.None);
 Console.WriteLine(String.Join("\n", Enumerable.Range(1, 3).Select(_ => CreateDataKey())));
@@ -167,8 +165,7 @@ public class MyContext(DbContextOptions options) : DbContext(options)
             entity.Property(e => e.Salary)
                 .HasBsonRepresentation(BsonType.Decimal128)
                 // Salaries from 0 to 10 million, no decimal place precision
-                .IsEncryptedForRange(0m, 10000000m, 0, 
-                    Guid.Parse("e1c70f05-d0f9-41c5-938e-059632b33d09"));
+                .IsEncryptedForRange(0m, 10000000m, 0, Guid.Parse("e1c70f05-d0f9-41c5-938e-059632b33d09"));
 
             entity.Property(e => e.Notes)
                 // This is encrypted and readable but you can't query on it

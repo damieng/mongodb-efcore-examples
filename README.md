@@ -1,2 +1,3 @@
-# mongodb-efcore-queryable-encryption
-A small quickstart for using MongoDB's Queryable Encryption with the EF Core Provider
+# Short examples for the MongoDB EF Core Provider
+
+A repo of small samples and snippets for using the MongoDB EF Core Provider.

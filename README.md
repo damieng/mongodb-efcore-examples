@@ -1,4 +1,4 @@
-# Example for the MongoDB EF Core Provider
+# MongoDB EF Core Provider examples
 
 A repo of small samples and snippets for using the MongoDB EF Core Provider.
 

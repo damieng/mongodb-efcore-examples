@@ -1,11 +1,11 @@
-@model CarListViewModel
+@model IEnumerable<ASPNetCarGarage.Models.Car>
 
 @if (TempData["CarDeleted"] != null)
 {
     <p class="text-success">@TempData["CarDeleted"]</p>
 }
 
-@if (!Model.Cars.Any())
+@if (!Model.Any())
 {
     <p>No results</p>
 }
@@ -28,7 +28,7 @@ else
             </th>
         </tr>
 
-        @foreach (var car in Model.Cars)
+        @foreach (var car in Model)
         {
             <tr>
                 <td>@car.Model</td>
@@ -40,7 +40,6 @@ else
                 </td>
             </tr>
         }
-
     </table>
 }
 

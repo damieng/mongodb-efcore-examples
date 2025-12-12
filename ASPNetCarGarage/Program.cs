@@ -1,5 +1,4 @@
-using CarInventorySystem.Models;
-using CarInventorySystem.Services;
+using ASPNetCarGarage.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,14 +6,14 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-var mongoDBSettings = builder.Configuration.GetSection("MongoDBSettings").Get<MongoDBSettings>();
-builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDBSettings"));
-
-builder.Services.AddDbContext<CarInventoryDbContext>(options =>
-    options.UseMongoDB(mongoDBSettings.AtlasURI ?? "",
-        mongoDBSettings.DatabaseName ?? ""));
-
-builder.Services.AddScoped<ICarService, CarService>();
+builder.Services.AddDbContext<CarInventoryDbContext>(o =>
+{
+    var mongoDbUri = builder.Configuration["MongoDBSettings:MongoDBUri"]
+                     ?? throw new InvalidOperationException("MongoDBSettings.MongoDbUri required in appsettings.json.");
+    var databaseName = builder.Configuration["MongoDBSettings:DatabaseName"] 
+                       ?? throw new InvalidOperationException("MongoDBSettings.DatabaseName required in appsettings.json.");
+    o.UseMongoDB(mongoDbUri, databaseName);
+});
 
 var app = builder.Build();
 
@@ -27,6 +26,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.UseRouting();
 
 app.UseAuthorization();
@@ -35,8 +35,7 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
         name: "default",
-        pattern: "{controller=Car}/{action=Index}/{id?}")
+        pattern: "{controller=CarInventory}/{action=Index}/{id?}")
     .WithStaticAssets();
-
 
 app.Run();
